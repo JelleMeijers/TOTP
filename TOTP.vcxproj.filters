@@ -24,6 +24,9 @@
     <ClInclude Include="HMAC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OTP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cryptography.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HMAC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OTP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

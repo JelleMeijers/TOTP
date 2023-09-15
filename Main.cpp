@@ -1,30 +1,13 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 
-#include "HMAC.h"
+#include "OTP.h"
+
+std::vector<unsigned char> key = { 0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x21, 0xDE, 0xAD, 0xBE, 0xEF };
 
 int main() {
-	std::string msg = "The quick brown fox jumps over the lazy dog";
-	//std::cout << "Msg: ";
-	//std::getline(std::cin, msg);
-
-	std::string key = "key";
-	//std::cout << "Key: ";
-	//std::getline(std::cin, key);
-
-	std::vector<unsigned char> msgBytes(msg.begin(), msg.end());
-	std::vector<unsigned char> keyBytes(key.begin(), key.end());
-
-	auto hmac = HMAC::HMAC_SHA1(keyBytes, msgBytes);
-
-	std::cout << "Expected HMAC: \tde7c9b85b8b78aa6bc8a7a36f70a90701c9db4d9" << std::endl;
-	std::cout << "HMAC: \t\t" << std::hex;
-	for (const auto b : hmac) {
-		if (b < 0x10)
-			std::cout << "0";
-		std::cout << (int)b;
-	}
-	std::cout << std::endl;
+	std::cout << "Code: " << std::setfill('0') << std::setw(6) << OTP::TOTP(key) << std::endl;
 
 	return 0;
 }
