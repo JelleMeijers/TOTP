@@ -1,12 +1,13 @@
 #include "Cryptography.h"
 #include <iostream>
+#include <array>
 
 #define ROL(x, n) (((x) << (n)) | ((x) >> (sizeof(x)*8-(n))))
 
-std::array<uint32_t, 5> Cryptography::SHA1(std::vector<unsigned char> _msg)
+std::vector<unsigned char> Cryptography::SHA1(std::vector<unsigned char> _msg)
 {
     //Initialize hash
-    std::array<uint32_t, 5> hash = { 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0 };
+    std::array<uint32_t, 5> hash = {0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0};
 
     //Get message length and calculate number of chunks
     size_t msgLen = _msg.size();
@@ -72,5 +73,13 @@ std::array<uint32_t, 5> Cryptography::SHA1(std::vector<unsigned char> _msg)
     }
 
     //Return the hash
-    return hash;
+    std::vector<unsigned char> retVal(20);
+    for (int i = 0; i < 5; i++) {
+        retVal[i*4] = (hash[i] >> 24) & 0xFF;
+        retVal[i*4+1] = (hash[i] >> 16) & 0xFF;
+        retVal[i*4+2] = (hash[i] >> 8) & 0xFF;
+        retVal[i*4+3] = hash[i] & 0xFF;
+    }
+
+    return retVal;
 }

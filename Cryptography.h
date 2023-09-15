@@ -1,9 +1,10 @@
 #pragma once
-#include <array>
 #include <vector>
+
+typedef std::vector<unsigned char>(*HashFunc)(std::vector<unsigned char> _msg);
 
 namespace Cryptography
 {
-	std::array<uint32_t, 5> SHA1(std::vector<unsigned char> _msg);
+	std::vector<unsigned char> SHA1(std::vector<unsigned char> _msg);
 };
 
